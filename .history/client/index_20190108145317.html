@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  </head>
+  <body>
+    hello
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <script type="text/javascript">
+      function init() {
+        console.log('init');
+        var socket = io('http://localhost:3000');
+        socket.on('connect', function(){});
+        socket.on('event', function(data){});
+        socket.on('disconnect', function(){});
+        socket.on('socketToMe', function (data) {
+          console.log('socketToMe', data);
+        });
+        console.log('im running');
+      }
+
+      function fetch() {
+        if(window.fetch){
+          fetch('http://localhost:3000')
+            .then(resp => {
+              const csp = resp.headers.get('Content-Security-Policy');
+              console.log(resp.headers);
+          });
+        }
+      }
+      document.addEventListener('readystatechange', function() {
+        if (document.readyState === "complete") {
+          init();
+          fetch();
+        }
+      });
+    </script>
+  </body>
+</html>
